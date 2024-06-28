@@ -22,8 +22,15 @@ read.delim("hangman.txt")
 # Instead I will use R to create a one column text file. 
 # I do not want to tell the user the possible words so see script named "WordsScript" so I made a new file
 # The file in this repo named hangman4.txt is the file I desire (hangman2.txt and hangman3 can be ignored since it was not in the desired format)
-# Read the file
-read.delim("hangman4.txt")
+# Read the file and name it bob. make it a matrix to separate the words into characters
+bob <- as.matrix(read.table("hangman6.txt"))
+length(bob)
+typeof(bob)
+
+# sample a random word from bob (error in plan line 9, sample chooses a random word, it does not let me pick one)
+sample(bob, size = 1)
+
+
 
 
 
