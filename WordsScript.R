@@ -13,4 +13,4 @@ View(hangman2)
 # call it hangman3 because I made hangman2 earlier but did not like the format
 # use row.names and col.names = F to remove names 
 # use quote = F so that quotes are not around the words
-write.table(hangman2, file = "hangman3.txt", row.names = F, col.names = F, quote= F, sep = "\t")
+write.table(hangman2, file = "hangman4.txt", row.names = F, quote= F, sep = "\t")
