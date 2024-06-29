@@ -56,11 +56,13 @@ repeat{
   else for (i in 1:10) {
     if (!grepl(letter, my_word)) {
       print(paste("No", letter, "does not appear in the word. You have",10-i," tries left"))
+      break
     } else if (grepl(letter, my_word)) 
       ugh <- gregexpr(letter, my_word)[[1]]
     display[ugh] <- letter 
-    display2 <- paste(display, collapse = "")
-    print(paste("Yay!", letter, "appears in the word", display2, "You have",10-i,"tries left. Please input the next letter"))
+    display <- paste(display, collapse = "")
+    print(paste("Yay!", letter, "appears in the word", display, "You have",10-i,"tries left. Please input the next letter"))
+    display <- unlist(strsplit(display, ""))
     break 
   }
 }
@@ -71,6 +73,7 @@ repeat{
   }
 
 ## This is what was working before in case I screw up and loose it all: 
+display <- c("_", "_", "_", "_", "_", "_", "_")
 repeat{
   letter <- readline(prompt = "Please enter a single letter: ")
   if (nchar(letter) != 1){
