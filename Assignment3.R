@@ -75,27 +75,40 @@ repeat{
 ## This is what was working before in case I screw up and loose it all: 
 display <- c("_", "_", "_", "_", "_", "_", "_")
 counter <- 0
+letter <- c("i")
 repeat{
+  # make the conuter to keep track of the amount of times the user has inputted
   counter <- counter + 1
+  # readline prompt to ask the user for an input. CHANGE TO ALLOW FOR 7 WORDS
   letter <- readline(prompt = "Please enter a single letter: ")
+  # check that the user has inputted something or length 1
   if (nchar(letter) != 1){
     stop("Entry was not a single digit. Please try again and do better this time.")
+  # check that the user has inputted a letter ### CHECK HERE THAT CAPITALS ARE ACCEPTED!!!!!
     } else if (grepl("[^A-Za-z]", letter))
       stop("Entry was not a letter. Please try again and do better this time.")
-  else if (counter >= 10)
+  # check that the user has not exceeded the maximum numvber of tries
+  else if (counter == 10)
     stop("Maximum number of tries exceeded. YOU LOSE! The word was ", my_word)
+  # check if the inputted letter is in the word
   if (!grepl(letter, my_word)) {
     print(paste("No", letter, "does not appear in the word. You have",10-counter," tries left"))
-  }else{
-    (grepl(letter, my_word)) 
+  }else if
+    (grepl(letter, my_word)) {
+    # if the letter is in the word, use gregexpr to get the position of the letter
         ugh <- gregexpr(letter, my_word)[[1]]
+    # replace letter in display at position ugh
         display[ugh] <- letter 
+    # collapse display so that it is a single word
         display <- paste(display, collapse = "")
+    # paste the results and let the user know whats up
         print(paste("Yay!", letter, "appears in the word", display, "You have",10-counter,"tries left. Please input the next letter"))
-        display <- unlist(strsplit(display, ""))
+    # make display back into individual letters for next time. 
+        display <- unlist(strsplit(display, ""))  
   }
+  # check if the user has gotten it
   if (display <- paste(display, collapse = "") == my_word) {
-    print(paste("Congradulations, you got it! The word was ", my_word))
+    print(paste("Winner winner chicken dinner, you got it! The word was ", my_word))
     break
   }
 }
