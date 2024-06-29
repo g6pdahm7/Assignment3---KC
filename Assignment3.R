@@ -41,28 +41,33 @@ cat(paste("Welcome to Kim's super fun game of hangman.", "\n",
           "You will have 10 guesses to get it right.", "\n", 
           "Have fun and don't lose."))
 
+display <- c("_", "_", "_", "_", "_", "_", "_")
+
+
 # attempt to create the hangman game... first try, I am not very hopeful but we shall see
 # use a repeat loop 
-# make a function - COMMENT BETTER IF YOU USE IT DUMMY
-hang_the_man <- function() {
-  repeat{
-    letter <- readline(prompt = "Please enter a single letter: ")
-    if (nchar(letter) != 1){
-      stop("Entry was not a single digit. Please try again and do better this time.")
+
+repeat{
+  letter <- readline(prompt = "Please enter a single letter: ")
+  if (nchar(letter) != 1){
+    stop("Entry was not a single digit. Please try again and do better this time.")
   } else if (grepl("[^A-Za-z]", letter))
-      stop("Entry was not a letter. Please try again and do better this time.")
-   else for (i in 1:10) {
-      if (!grepl(letter, my_word)) {
-        print(paste("No", letter, "does not appear in the word. You have",10-i," tries left"))
-      } else if (grepl(letter, my_word)) 
-        print(paste("Yay!", letter, "appears in the word", str_count(my_word, letter), "time(s). You have",10-i,"tries left. Please input the next letter"))
-     break 
-     }
+    stop("Entry was not a letter. Please try again and do better this time.")
+  else for (i in 1:10) {
+    if (!grepl(letter, my_word)) {
+      print(paste("No", letter, "does not appear in the word. You have",10-i," tries left"))
+    } else if (grepl(letter, my_word)) 
+      ugh <- gregexpr(letter, my_word)[[1]]
+    display[ugh] <- letter 
+    display2 <- paste(display, collapse = "")
+    print(paste("Yay!", letter, "appears in the word", display2, "You have",10-i,"tries left. Please input the next letter"))
+    break 
   }
+}
   # I have a few problems I need to solve. 
-  #' I do want to show the user where their letters are
-  #' I also need to fix the number of attempts they have
-  #' I also need to have a end result where they have found the word
+  #' I do want to show the user where their letters are. SOLVED! kinda..
+  #' I also need to fix the number of attempts they have!!!
+  #' I also need to have a end result where they have found the word!!!
   }
 
 ## This is what was working before in case I screw up and loose it all: 
@@ -76,23 +81,50 @@ repeat{
     if (!grepl(letter, my_word)) {
       print(paste("No", letter, "does not appear in the word. You have",10-i," tries left"))
     } else if (grepl(letter, my_word)) 
-      print(paste("Yay!", letter, "appears in the word", str_count(my_word, letter), "time(s). You have",10-i,"tries left. Please input the next letter"))
+      ugh <- gregexpr(letter, my_word)[[1]]
+      display[ugh] <- letter 
+      display2 <- paste(display, collapse = "")
+      print(paste("Yay!", letter, "appears in the word", display2, "You have",10-i,"tries left. Please input the next letter"))
     break 
   }
 }
 ## END 
 
+
 # practice to figure it out
 ?for
-kay <- c("c")
-poop <- c("poopie")
+kay <- c("p")
+poop <- c("poopies")
+length(poop)
+length(display)
+newpoo <- unlist(strsplit(poop, ""))
+length(newpoo)
 
 !grepl(kay, poop)
 length(grep(kay, poop))
 sum(grepl(kay, poop))
 str_count(poop, kay)
+str_sort(poop, kay)
 str_extract_all(poop, kay)
 str_view(poop, kay)
+str_locate_all(poop, kay)
+gregexpr(kay, newpoo)[[1]]
+gregexpr(kay, poop)[[1]]
+
+ugh <- gregexpr(kay, poop)[[1]]
+display[ugh] <- kay 
+
+
+grep()
+
+gsub(display, kay, str_count(poop, kay), ignore.case = TRUE)
+
+str_replace(display, "_", str_locate_all(poop, kay), ignore.case = TRUE)
+
+# Kim get the position of where the letter is
+
+display[gregexpr(kay, poop)] = kay
+
 
 for (i in 1:10) {
   if (!grepl(kay, poop)) {
