@@ -17,6 +17,10 @@
 #' If they fail I will let them know they have lost and reveal the secret word
 #' If they get it I will let them know they are a winner :))
 
+# Install stringr
+install.packages("stringr")
+library(stringr)
+
 # Issue with line 7 of my master plan. Making a text file on my mac added a bunch of unwanted things 
 read.delim("hangman.txt")
 # Instead I will use R to create a one column text file. 
@@ -28,12 +32,12 @@ length(bob)
 typeof(bob)
 
 # sample a random word from bob (error in plan line 9, sample chooses a random word, it does not let me pick one)
-word <- sample(bob, size = 1)
+my_word <- sample(bob, size = 1)
 
 # explain the rules to the user. 
 cat(paste("Welcome to Kim's super fun game of hangman.", "\n", 
           "Today you will be guessing my word.", "\n", 
-          "The word is", nchar(word), "letters long.", "\n", 
+          "The word is", nchar(my_word), "letters long.", "\n", 
           "You will have 10 guesses to get it right.", "\n", 
           "Have fun and don't lose."))
 
@@ -43,17 +47,73 @@ cat(paste("Welcome to Kim's super fun game of hangman.", "\n",
 hang_the_man <- function() {
   repeat{
     letter <- readline(prompt = "Please enter a single letter: ")
-    if (nchar(letter) != 1)
+    if (nchar(letter) != 1){
       stop("Entry was not a single digit. Please try again and do better this time.")
-  } else {
-    if (grepl("[A-Za-z"], letter))
+  } else if (grepl("[^A-Za-z]", letter))
+      stop("Entry was not a letter. Please try again and do better this time.")
+   else for (i in 1:10) {
+      if (!grepl(letter, my_word)) {
+        print(paste("No", letter, "does not appear in the word. You have",10-i," tries left"))
+      } else if (grepl(letter, my_word)) 
+        print(paste("Yay!", letter, "appears in the word", str_count(my_word, letter), "time(s). You have",10-i,"tries left. Please input the next letter"))
+     break 
+     }
+  }
+  # I have a few problems I need to solve. 
+  #' I do want to show the user where their letters are
+  #' I also need to fix the number of attempts they have
+  #' I also need to have a end result where they have found the word
+  }
+
+## This is what was working before in case I screw up and loose it all: 
+repeat{
+  letter <- readline(prompt = "Please enter a single letter: ")
+  if (nchar(letter) != 1){
+    stop("Entry was not a single digit. Please try again and do better this time.")
+  } else if (grepl("[^A-Za-z]", letter))
+    stop("Entry was not a letter. Please try again and do better this time.")
+  else for (i in 1:10) {
+    if (!grepl(letter, my_word)) {
+      print(paste("No", letter, "does not appear in the word. You have",10-i," tries left"))
+    } else if (grepl(letter, my_word)) 
+      print(paste("Yay!", letter, "appears in the word", str_count(my_word, letter), "time(s). You have",10-i,"tries left. Please input the next letter"))
+    break 
   }
 }
+## END 
+
+# practice to figure it out
+?for
+kay <- c("c")
+poop <- c("poopie")
+
+!grepl(kay, poop)
+length(grep(kay, poop))
+sum(grepl(kay, poop))
+str_count(poop, kay)
+str_extract_all(poop, kay)
+str_view(poop, kay)
+
+for (i in 1:10) {
+  if (!grepl(kay, poop)) {
+    print(paste("No", kay, "does not appear in the word. You have",10-i," tries left"))
+    break
+  } else {
+    print(paste("Yay!", kay, "appears in the word", str_count(poop, kay), "times"))
+}}
+
+
+for (i in 1:10) {
+  if (grepl(kay, poop)) {
+    print(paste("Yay!", kay, "appears in the word", str_count(poop, kay), "times"))
+  } else {
+    next
+  }}
 
 
 
 
-
-
+if (grepl(letter, my_word)) {
+  print(paste("Yay!", letter, "appears in the word", str_count(my_word, letter), "times")))
 
 
