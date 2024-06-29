@@ -67,32 +67,49 @@ repeat{
   }
 }
   # I have a few problems I need to solve. 
-  #' I do want to show the user where their letters are. SOLVED! kinda..
+  #' I do want to show the user where their letters are. SOLVED! 
   #' I also need to fix the number of attempts they have!!!
   #' I also need to have a end result where they have found the word!!!
   }
 
 ## This is what was working before in case I screw up and loose it all: 
 display <- c("_", "_", "_", "_", "_", "_", "_")
+counter <- 0
 repeat{
+  counter <- counter + 1
   letter <- readline(prompt = "Please enter a single letter: ")
   if (nchar(letter) != 1){
     stop("Entry was not a single digit. Please try again and do better this time.")
-  } else if (grepl("[^A-Za-z]", letter))
-    stop("Entry was not a letter. Please try again and do better this time.")
-  else for (i in 1:10) {
-    if (!grepl(letter, my_word)) {
-      print(paste("No", letter, "does not appear in the word. You have",10-i," tries left"))
-    } else if (grepl(letter, my_word)) 
-      ugh <- gregexpr(letter, my_word)[[1]]
-      display[ugh] <- letter 
-      display2 <- paste(display, collapse = "")
-      print(paste("Yay!", letter, "appears in the word", display2, "You have",10-i,"tries left. Please input the next letter"))
-    break 
+    } else if (grepl("[^A-Za-z]", letter))
+      stop("Entry was not a letter. Please try again and do better this time.")
+  else if (counter >= 10)
+    stop("Maximum number of tries exceeded. YOU LOSE! The word was ", my_word)
+  if (!grepl(letter, my_word)) {
+    print(paste("No", letter, "does not appear in the word. You have",10-counter," tries left"))
+  }else{
+    (grepl(letter, my_word)) 
+        ugh <- gregexpr(letter, my_word)[[1]]
+        display[ugh] <- letter 
+        display <- paste(display, collapse = "")
+        print(paste("Yay!", letter, "appears in the word", display, "You have",10-counter,"tries left. Please input the next letter"))
+        display <- unlist(strsplit(display, ""))
+  }
+  if (display <- paste(display, collapse = "") == my_word) {
+    print(paste("Congradulations, you got it! The word was ", my_word))
+    break
   }
 }
 ## END 
+## WHY IS MY COUNTER NOT COUNTERINGGGG
 
+repeat{
+  counter <- counter + 1
+  print(paste("your count is:", counter))
+if (counter == 5) {
+  stop("boo")
+  break
+}
+}
 
 # practice to figure it out
 ?for
