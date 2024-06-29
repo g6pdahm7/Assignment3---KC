@@ -28,7 +28,30 @@ length(bob)
 typeof(bob)
 
 # sample a random word from bob (error in plan line 9, sample chooses a random word, it does not let me pick one)
-sample(bob, size = 1)
+word <- sample(bob, size = 1)
+
+# explain the rules to the user. 
+cat(paste("Welcome to Kim's super fun game of hangman.", "\n", 
+          "Today you will be guessing my word.", "\n", 
+          "The word is", nchar(word), "letters long.", "\n", 
+          "You will have 10 guesses to get it right.", "\n", 
+          "Have fun and don't lose."))
+
+# attempt to create the hangman game... first try, I am not very hopeful but we shall see
+# use a repeat loop 
+# make a function - COMMENT BETTER IF YOU USE IT DUMMY
+hang_the_man <- function() {
+  repeat{
+    letter <- readline(prompt = "Please enter a single letter: ")
+    if (nchar(letter) != 1)
+      stop("Entry was not a single digit. Please try again and do better this time.")
+  } else {
+    if (grepl("[A-Za-z"], letter))
+  }
+}
+
+
+
 
 
 
