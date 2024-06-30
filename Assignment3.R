@@ -105,6 +105,7 @@ repeat{
         print(paste("Yay!", letter, "appears in the word", display, "You have",10-counter,"tries left. Please input the next letter"))
     # make display back into individual letters for next time. 
         display <- unlist(strsplit(display, ""))  
+        next
   }
   # check if the user has gotten it
   if (display <- paste(display, collapse = "") == my_word) {
@@ -113,9 +114,11 @@ repeat{
   }
 }
 ## END 
-## current issue is that once display gets one letter it fucks up the second input. 
-##  
-#### TRY SOMETHING NEW AGAIN UGHHHH 
+## its always two steps forward and one step back
+## now display works but if you get the word right it does not go to the next part
+## TO DO LIST: 
+### fix the issue so that the user can win
+### allow the user to attempt to input the full word
 
 repeat{
   # make the counter to keep track of the amount of times the user has inputted
@@ -142,17 +145,15 @@ repeat{
     display[ugh] <- letter 
     # collapse display so that it is a single word
     display <- paste(display, collapse = "")
+  } if (display == my_word){
+    print(paste("Winner winner chicken dinner, you got it! The word was ", my_word))
+  break
+} else 
     # paste the results and let the user know whats up
     print(paste("Yay!", letter, "appears in the word", display, "You have",10-counter,"tries left. Please input the next letter"))
     # make display back into individual letters for next time. 
     display <- unlist(strsplit(display, ""))
     next
-  }
-  # check if the user has gotten it
-  if (display <- paste(display, collapse = "") == my_word) {
-    print(paste("Winner winner chicken dinner, you got it! The word was ", my_word))
-    break
-  }
 }
 
 # practice to figure it out
