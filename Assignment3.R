@@ -145,7 +145,8 @@ repeat{
     # paste the results and let the user know whats up
     print(paste("Yay!", letter, "appears in the word", display, "You have",10-counter,"tries left. Please input the next letter"))
     # make display back into individual letters for next time. 
-    display <- unlist(strsplit(display, ""))  
+    display <- unlist(strsplit(display, ""))
+    next
   }
   # check if the user has gotten it
   if (display <- paste(display, collapse = "") == my_word) {
