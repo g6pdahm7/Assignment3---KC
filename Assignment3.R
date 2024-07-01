@@ -52,20 +52,30 @@ counter <- 0
 repeat{
   # make the counter to keep track of the amount of times the user has inputted
   counter <- counter + 1
-  # readline prompt to ask the user for an input. CHANGE TO ALLOW FOR 7 WORDS
-  letter <- readline(prompt = "Please enter a single letter: ")
+  # readline prompt to ask the user for an input of a single letter of a 7 letter guess 
+  letter <- readline(prompt = "Please enter a single letter or 7 letter guess: ")
+  # change the input to lower case so that if the user enters a capital letter that is accepted 
+  letter <- tolower(letter)
   # check that the user has not exceeded the maximum number of tries
   if (counter == 10 ){
     stop("Maximum number of tries exceeded. YOU LOSE! The word was ", my_word)
-    # check that the user has inputted something or length 1
-  } else if (nchar(letter) != 1){
-    print("Entry was not a single digit. Please try again and do better this time, you have", 10-counter, "tries left")
     # check that the user has inputted a letter ### CHECK HERE THAT CAPITALS ARE ACCEPTED!!!!!
-  } else if (grepl("[^A-Za-z]", letter)) {
-    print("Entry was not a letter. Please try again and do better this time, you have", 10-counter, "tries left")
-    # check that the user has not exceeded the maximum number of tries
-  } else if (!grepl(letter, my_word)) {
-    print(paste("No", letter, "does not appear in the word. You have",10-counter," tries left"))
+  } else if (grepl("[^a-z]", letter)) {
+    print(paste("Entry was not a letter. Please try again and do better this time, you have", 10-counter, "tries left"))
+    # check that the user has inputted something or length 1 or 7
+  } else if (nchar(letter) != 1 & nchar(letter) != 7){
+    print(paste("Entry was not a 1 or 7 letters. Please try again and do better this time, you have", 10-counter, "tries left"))
+  } else if (nchar(letter) == 7) {
+    if (letter != my_word){
+      print(paste("The word you have guessed is incorrect. You have", 10-counter, "tries left. Please try again"))
+    } else if (letter == my_word){
+      print(paste("Winner winner chicken dinner, you got it! The word was", my_word))
+      break
+    }
+  }
+  # check if the letter entered is in the word
+  else if (!grepl(letter, my_word)) {
+    print(paste("No", letter, "does not appear in the word. You have",10-counter,"tries left"))
     next
   }else if (grepl(letter, my_word)) {
     # if the letter is in the word, use gregexpr to get the position of the letter
@@ -90,6 +100,7 @@ repeat{
 ## END 
 ## its always two steps forward and one step back
 ## TO DO LIST: 
-### see if the user can enter capital letters. if not, let them know it must be lower case
-### allow the user to attempt to input the full word
+### celebrate!!!
+### and fix my commenting 
+
 
