@@ -29,6 +29,14 @@ bob <- as.matrix(read.table("hangman6.txt"))
 # sample a random word from bob (error in plan line 9, sample chooses a random word, it does not let me pick one)
 my_word <- sample(bob, size = 1)
 
+# set "display" which will show the user how many letters they have in the word and where they are. 
+# at the beginning, display is underscores
+# I forgot to add this into my plan, it should have been after line 11 (for "display" and "counter")
+display <- c("_", "_", "_", "_", "_", "_", "_")
+# set "counter" to keep track of how many attempts the user has used
+# at the beginning, counter is 0 as the game has not started 
+counter <- 0
+
 # explain the rules to the user. 
 # As per line 11 I am being nice and letting the user have 10 tries
 # I was confused while making my word file so all of the potential words have 7 letters, but use nchar(my_word) to be sure
@@ -37,14 +45,6 @@ cat(paste("Welcome to Kim's super fun game of hangman!", "\n",
           "The word is", nchar(my_word), "letters long.", "\n", 
           "You will have 10 guesses to get it right.", "\n", 
           "Have fun and don't lose."))
-
-# set "display" which will show the user how many letters they have in the word and where they are. 
-# at the beginning, display is underscores
-# I forgot to add this into my plan, it should have been after line 11 (for "display" and "counter")
-display <- c("_", "_", "_", "_", "_", "_", "_")
-# set "counter" to keep track of how many attempts the user has used
-# at the beginning, counter is 0 as the game has not started 
-counter <- 0
 
 # create the repeat loop for hangman so that it will continue until it encounters one of two breaks (if the counter hits 10 or if the correct word is guessed)
 # my master plan was not a very masterful plan. It was so not masterful in fact that although steps 12-18 are included in my loop, I missed many other steps also included in my loop
