@@ -18,7 +18,7 @@
 #' If they get it I will let them know they are a winner :))
 
 # Issue with line 7 of my master plan. Making a text file on my mac added a bunch of unwanted things 
-read.delim("hangman.txt")
+read.delim("hangman6.txt")
 # Instead I will use R to create a one column text file. 
 # I do not want to tell the user the possible words so see script named "WordsScript" so I made a new file
 # The file in this repo named hangman6.txt is the file I desire (hangman2.txt to hangman5.txt can be ignored since it was not in the desired format)
@@ -98,11 +98,3 @@ repeat{
     }
   }
 }
-
-## END 
-## its always two steps forward and one step back
-## TO DO LIST: 
-### celebrate!!!
-### and fix my commenting 
-
-
