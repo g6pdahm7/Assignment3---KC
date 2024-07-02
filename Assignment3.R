@@ -18,7 +18,6 @@
 #' If they get it I will let them know they are a winner :))
 
 # Issue with line 7 of my master plan. Making a text file on my mac added a bunch of unwanted things 
-read.delim("hangman6.txt")
 # Instead I will use R to create a one column text file. 
 # I do not want to tell the user the possible words so see script named "WordsScript" so I made a new file
 # The file in this repo named hangman6.txt is the file I desire (hangman2.txt to hangman5.txt can be ignored since it was not in the desired format)
@@ -32,6 +31,8 @@ my_word <- sample(bob, size = 1)
 # set "display" which will show the user how many letters they have in the word and where they are. 
 # at the beginning, display is underscores
 # I forgot to add this into my plan, it should have been after line 11 (for "display" and "counter")
+# I was confused about the assignment at the start (before I started I didnt know sample() chooses a random sample so I thought I picked a word which is why I made them all the same length)
+# so that is why all my words are 7 letters long 
 display <- c("_", "_", "_", "_", "_", "_", "_")
 # set "counter" to keep track of how many attempts the user has used
 # at the beginning, counter is 0 as the game has not started 
@@ -49,6 +50,8 @@ cat(paste("Welcome to Kim's super fun game of hangman!", "\n",
 # create the repeat loop for hangman so that it will continue until it encounters one of two breaks (if the counter hits 10 or if the correct word is guessed)
 # my master plan was not a very masterful plan. It was so not masterful in fact that although steps 12-18 are included in my loop, I missed many other steps also included in my loop
 # I have indicated the steps I missed in my plan with a * for simplicity. 
+# Use a repeat loop and not a while loop so that if the readline prompt is not followed it counts as a try instead of breaking and to only break when the 
+# user wins and only stop if the counter is exceeded
 repeat{
   # make the counter add one each time the loop runs to keep track of the amount of times the user has inputted*
   counter <- counter + 1
