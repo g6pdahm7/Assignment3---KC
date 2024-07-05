@@ -3,6 +3,9 @@
 # Kimberly Corneil
 # July 2, 2024
 
+
+#' REVIEW: Kim clearly lays out the plan she will be using in a series of actionable steps. This is great!
+
 ## My master plan for a super fun game of hangman
 #' Make a txt file on my mac and save it as "words.txt"
 #' Read the word file with R
@@ -17,6 +20,9 @@
 #' If they fail I will let them know they have lost and reveal the secret word
 #' If they get it I will let them know they are a winner :))
 
+#'REVIEW: Kim does a great job using the read.table and as.matrix functions to load the words 
+#'in her text file into R. 
+
 # Issue with line 7 of my master plan. Making a text file on my mac added a bunch of unwanted things 
 # Instead I will use R to create a one column text file. 
 # I do not want to tell the user the possible words so see script named "WordsScript" so I made a new file
@@ -25,8 +31,14 @@
 # Read the file and name it bob. make it a matrix to separate the words into characters
 bob <- as.matrix(read.table("hangman6.txt"))
 
+#' REVIEW: This is good. Kim uses the sample function to select a random word from the text file. 
+
 # sample a random word from bob (error in plan line 9, sample chooses a random word, it does not let me pick one)
 my_word <- sample(bob, size = 1)
+
+#'REVIEW: Kim uses the display function to show the underscores that appear at the beginning of the game. The code did exactly what she wanted.
+#'However, I would suggest adding spaces between each underscore so it's more legible, and users can easily tell how many letters are missing 
+#'in each spot. 
 
 # set "display" which will show the user how many letters they have in the word and where they are. 
 # at the beginning, display is underscores
@@ -38,6 +50,8 @@ display <- c("_", "_", "_", "_", "_", "_", "_")
 # at the beginning, counter is 0 as the game has not started 
 counter <- 0
 
+#' REVIEW: Kim makes good use of the paste function to lay out the instructions of the game. 
+
 # explain the rules to the user. 
 # As per line 11 I am being nice and letting the user have 10 tries
 # I was confused while making my word file so all of the potential words have 7 letters, but use nchar(my_word) to be sure
@@ -46,6 +60,11 @@ cat(paste("Welcome to Kim's super fun game of hangman!", "\n",
           "The word is", nchar(my_word), "letters long.", "\n", 
           "You will have 10 guesses to get it right.", "\n", 
           "Have fun and don't lose."))
+
+#' REVIEW: Kim makes makes very creating use of the repeat function. The plan she laid out is logical, and leads to the desired output through the code she 
+#' implemented. She starts the loop by counting an attempt, followed by "readlining" the user to enter a prompt. The prompt is then 
+#' subjected to a series of conditions to see if the entry qualifies. 
+
 
 # create the repeat loop for hangman so that it will continue until it encounters one of two breaks (if the counter hits 10 or if the correct word is guessed)
 # my master plan was not a very masterful plan. It was so not masterful in fact that although steps 12-18 are included in my loop, I missed many other steps also included in my loop
@@ -101,3 +120,10 @@ repeat{
     }
   }
 }
+
+
+#' Overall, Kim uses code creatively to achieve her intended target. However, there are some suggestions that I would add
+#' to make the user experience slightly better. I would highly suggest informing the user of what letters they have guessed so 
+#' far, in order to avoid duplicates. Secondly, I would also suggest not counting invalid or correct entries as an attempt. If
+#' a word has more letters, the user will have less incorrect attempts to guess the word. Additionally, if a word consists of 10
+#' or more letters, the user won't have enough attmepts to guess the word. 
